@@ -1,0 +1,9 @@
+<a [routerLink]="[index]" routerLinkActive='active' class="list-group-item clearfix" style="cursor: pointer;">
+    <div class="pull-left">
+        <h4 class="list-group-item-heading">{{recipeItem.name}}</h4>
+        <p class="list-group-item-text">{{recipeItem.description}}</p>
+    </div>
+    <span class="pull-right">
+        <img class="img-response" [alt]="recipeItem.name" style="max-height: 50px;" [src]="recipeItem.imagePath"/>
+    </span>
+</a>
