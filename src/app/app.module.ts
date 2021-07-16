@@ -17,6 +17,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { CurrencyFormatPipe } from './shared/currencyformat.pipe';
+import { AuthComponent } from './auth/auth.component';
+import { LoadingSpinner } from './shared/loading-spinner/loading-spinner.component';
 
 
 @NgModule({
@@ -29,6 +31,8 @@ import { CurrencyFormatPipe } from './shared/currencyformat.pipe';
     RecipeItemComponent,
     ShoppingListComponent,
     ShoppingEditComponent,
+    AuthComponent,
+    LoadingSpinner,
     DropDownDirective,
     RecipeStartComponent,
     RecipeEditComponent,
