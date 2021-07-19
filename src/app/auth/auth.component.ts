@@ -1,5 +1,6 @@
 import { Component, OnDestroy } from "@angular/core";
 import { NgForm } from "@angular/forms";
+import { Router } from "@angular/router";
 import { Subscription } from "rxjs";
 import { AuthService } from "./auth.service";
 
@@ -9,7 +10,7 @@ import { AuthService } from "./auth.service";
 })
 export class AuthComponent implements OnDestroy{
 
-    constructor(private _authService:AuthService){}
+    constructor(private _authService:AuthService,private _router:Router){}
 
     isLoginMode:boolean=true;
     unsubSubscribe:Subscription;
@@ -29,15 +30,24 @@ export class AuthComponent implements OnDestroy{
         const password = form.value.password;
         this.isLoading = true;
         if(this.isLoginMode){
-
+            this.unsubSubscribe = this._authService.login(email,password).subscribe(resData=>{
+                console.log(resData);
+                this.isLoading = false;
+                this._router.navigate(['/recipes']);
+            },(errResponse)=>{
+                console.log(errResponse);
+                this.erroor = errResponse;
+                this.isLoading = false;
+            })
         }
         else{
           this.unsubSubscribe = this._authService.signup(email,password).subscribe((resData)=>{
                 console.log(resData);
                 this.isLoading = false;
-            },(error)=>{
-                console.log(error);
-                this.erroor="An error occured !!!";
+                this._router.navigate(['/recipes']);
+            },(errorResponse)=>{
+                console.log(errorResponse);
+                this.erroor=errorResponse;
                 this.isLoading = false;
             });
         }
