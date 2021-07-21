@@ -17,10 +17,10 @@ export class AuthComponent implements OnDestroy{
         private componentFactoryResolver:ComponentFactoryResolver){}
 
     isLoginMode:boolean=true;
-    unsubSubscribe:Subscription;
+    unsubSubscribe:Subscription=null;
     isLoading : boolean=false;
     erroor:string=null;
-    unsubAlert:Subscription;
+    unsubAlert:Subscription=null;
 
     @ViewChild(PlaceHolderDirective,{static:false}) alertHost:PlaceHolderDirective;
 
@@ -64,8 +64,8 @@ export class AuthComponent implements OnDestroy{
     }
 
     ngOnDestroy():void{
-        this.unsubSubscribe.unsubscribe();
-        this.unsubAlert.unsubscribe();
+        this.unsubSubscribe?.unsubscribe();
+        this.unsubAlert?.unsubscribe();
     }
 
     showErrorAlert(message:string):void{
@@ -75,7 +75,7 @@ export class AuthComponent implements OnDestroy{
         const componentRef = hostViewContainerRef.createComponent(alertCompFactory);
         componentRef.instance.message=message;
         this.unsubAlert = componentRef.instance.closeEventEmitter.subscribe(()=>{
-            this.unsubAlert.unsubscribe();
+            this.unsubAlert?.unsubscribe();
             hostViewContainerRef.clear();
         });
     }
